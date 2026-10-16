@@ -20,8 +20,6 @@ Mention **@Arcade** in a supported chat, or [play in your browser](https://arcad
 
 **Rally** — Classic paddle arcade.
 
-## License
-
-Installation and use with the official Arcade service are permitted under the [proprietary license](LICENSE.md). The game engine is private.
+Licensed under [MIT](LICENSE.md).
 
 [hello@beautifulthings.org](mailto:hello@beautifulthings.org)

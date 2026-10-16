@@ -22,6 +22,6 @@ If terminal/plugin installation is unavailable, do not attempt these commands th
 - Players verify inside Arcade when they choose **Play a Human**. Let the user complete verification. **Destroy a Bot** does not require World ID.
 - If no game is specified, choose from the live catalog. Never generate a substitute game or claim that installation alone proves it launched.
 - Test an Arcade mention in a fresh chat when possible. Report any missing host support, access, or unverified behavior plainly.
-- Read and preserve [LICENSE.md](LICENSE.md). Installing the package does not grant rights to redistribute the code or run another service.
+- Preserve the copyright and [MIT license](LICENSE.md) notices.
 
 To update an existing checkout: pull without overwriting local changes, rerun `codex plugin add worldchat-arcade@arcade-shared`, and refresh the connection. Open a new game card.
