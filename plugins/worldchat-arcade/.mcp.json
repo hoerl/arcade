@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "worldchat": {
+      "type": "http",
+      "url": "https://arcade.beautifulthings.org/mcp"
+    }
+  }
+}

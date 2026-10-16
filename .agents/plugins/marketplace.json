@@ -1,0 +1,20 @@
+{
+  "name": "arcade-shared",
+  "interface": {
+    "displayName": "Arcade"
+  },
+  "plugins": [
+    {
+      "name": "worldchat-arcade",
+      "source": {
+        "source": "local",
+        "path": "./plugins/worldchat-arcade"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
