@@ -2,16 +2,16 @@
 
 Instructions for a coding agent. Use the official hosted service; no local game server or developer credentials are needed.
 
-1. Check for an existing Arcade connection. If `arcade.catalog` and `arcade.play` are available, reuse it; do not add a duplicate connection. For an existing installation from this repository, follow **Update** below so the bundled instructions are current.
-2. In Codex with terminal access and plugin support, run the commands below. Reuse an existing checkout when possible; preserve local changes. Requires Git and Codex with `codex plugin` support. After installation, reload plugins through the host's supported mechanism. If the desktop host does not pick up the change, restart it. Test in a fresh chat.
-3. Read the live catalog, choose Rally when present (otherwise an available game), and call `arcade.play` with its exact ID. Confirm the real game opens inline.
+1. Check for an existing Arcade connection and inspect `codex plugin marketplace list --json` when terminal/plugin support is available. If this repository's `arcade-shared` marketplace is registered as a local folder, follow **One-time migration** below. If it is already registered as the Git source `https://github.com/hoerl/arcade.git` tracking `main`, reuse it. Reuse other authorized Arcade connections; do not add a duplicate MCP connection.
+2. For a new Codex installation with terminal and plugin support, register the Git-backed marketplace directly. No checkout is required. Requires Git and Codex with `codex plugin` support:
 
 ```sh
-git clone https://github.com/hoerl/arcade.git
-cd arcade
-codex plugin marketplace add .
+codex plugin marketplace add https://github.com/hoerl/arcade.git --ref main
 codex plugin add worldchat-arcade@arcade-shared
 ```
+
+3. Confirm that `arcade-shared` has `marketplaceSource.sourceType` equal to `git` and the official repository URL in `codex plugin marketplace list --json`, and that `worldchat-arcade@arcade-shared` is installed. Do not register `.` or a checkout directory as the source; local folders do not receive Git updates. Keep the source on the moving `main` branch, not a fixed commit or release tag.
+4. Reload plugins through the host's supported mechanism after installation. If the desktop host does not pick up the change, restart it. In a fresh chat, read the live catalog, choose Rally when present (otherwise an available game), and call `arcade.play` with its exact ID. Confirm the real game opens inline.
 
 If terminal/plugin installation is unavailable, do not attempt these commands through an unrelated tool. In ChatGPT, reuse an existing authorized Arcade connection if available. Otherwise explain that public ChatGPT installation is pending and offer [browser play](https://arcade.beautifulthings.org/?game=rally). This GitHub guide does not grant access to a private ChatGPT app.
 
@@ -24,17 +24,23 @@ If terminal/plugin installation is unavailable, do not attempt these commands th
 - Test an Arcade mention in a fresh chat when possible. Report any missing host support, access, or unverified behavior plainly.
 - Preserve the copyright and [MIT license](LICENSE.md) notices.
 
-## Update
+## Automatic updates
 
-Server-side fixes apply on the next MCP request. Bundled skills are installed files and need a package update. In the existing public installer checkout, run:
+Codex Desktop checks configured Git marketplaces when its app server starts and refreshes installed plugin files. Future releases from `main` can therefore arrive without another install command or a manual `git pull`. Updates follow the host's refresh lifecycle; this is not a promise of immediate background updates while the app stays open. Restart the desktop host and use a fresh chat if it has been running since before a release. Hosts that do not run automatic marketplace refresh cannot be made automatic by this guide alone.
+
+Server-side fixes apply on the next MCP request independently of package updates. The host manages the downloaded package; do not edit its cache or add a separate updater, startup hook, or scheduled job.
+
+## One-time migration
+
+Older versions of this guide registered a local checkout. An existing local registration cannot switch itself to GitHub remotely. Run this migration once, only when `arcade-shared` is still registered as a local source:
 
 ```sh
-git pull --ff-only
-codex plugin marketplace add .
+codex plugin marketplace remove arcade-shared
+codex plugin marketplace add https://github.com/hoerl/arcade.git --ref main
 codex plugin add worldchat-arcade@arcade-shared
 ```
 
-Preserve local changes. If the pull cannot fast-forward or conflicts with local work, stop and resolve that without resetting, cleaning, or overwriting files. Reload plugins through the host's supported mechanism (restart the desktop host if needed), then use a fresh chat and open a new game card. Version 0.3.6 includes the gameplay-only notification instructions.
+Remove only this marketplace registration; do not uninstall Arcade, delete the old checkout, overwrite local changes, disconnect the player's account, or remove another marketplace. Keep the same `worldchat-arcade@arcade-shared` identity. If the source is managed by an administrator or the commands fail, preserve that configuration and report the failure rather than editing host files by hand. Verify the Git source as above, then reload the host and use a fresh chat. No per-release migration is needed afterward.
 
 ## Multiplayer invitations
 

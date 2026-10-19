@@ -12,7 +12,7 @@ Paste this into your coding agent:
 Read https://raw.githubusercontent.com/hoerl/arcade/main/INSTALL.md and install Arcade.
 ```
 
-The guide installs the hosted MCP plugin in Codex with plugin support. Existing users should follow its update steps to receive bundled instruction changes. Public ChatGPT installation is coming soon.
+The guide installs the hosted MCP plugin from a Git-backed marketplace. Codex Desktop checks for package updates at app-server startup, so users do not need to rerun install commands for each release. Existing local-checkout installs need the guide's one-time migration. Public ChatGPT installation is coming soon.
 
 Rematch alerts are opt-in and require MCP Events in a supported ChatGPT Work chat or dot; installation alone does not enable notifications.
 
