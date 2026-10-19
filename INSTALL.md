@@ -19,7 +19,7 @@ If terminal/plugin installation is unavailable, do not attempt these commands th
 
 - The bundled connection uses `https://arcade.beautifulthings.org/mcp`.
 - Do not install a second MCP or World ID plugin, start a local server, request secrets, or use sandbox World ID.
-- Players verify inside Arcade when they choose **Play a Human**. Let the user complete verification. **Destroy a Bot** does not require World ID.
+- The card opens with **Tap to Start**. Players verify inside Arcade when required; let the user complete verification. Verified players practice against the bot while the shared human queue searches, then enter a random available game when matched. There are no separate **Play a Human** or **Destroy a Bot** buttons.
 - If no game is specified, choose from the live catalog. Never generate a substitute game or claim that installation alone proves it launched.
 - Test an Arcade mention in a fresh chat when possible. Report any missing host support, access, or unverified behavior plainly.
 - Preserve the copyright and [MIT license](LICENSE.md) notices.

@@ -1,6 +1,6 @@
 {
   "name": "worldchat-arcade",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Open real catalog games inline in chat. On @arcade, use the Arcade catalog and launch tools; choose a game if none is named. Never generate a substitute. Rally is a paddle game, not racing.",
   "author": {
     "name": "Wild Things Holdings, Inc."

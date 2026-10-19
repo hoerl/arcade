@@ -2,7 +2,7 @@
 
 **Play games together.**
 
-Multiplayer games inside ChatGPT. Connect your World ID and play with real people. Practice against a bot anytime.
+Multiplayer games inside ChatGPT. Connect your World ID and play with real people. Warm up against a bot while waiting for a human.
 
 ## Install
 
@@ -18,7 +18,7 @@ Rematch alerts are opt-in and require MCP Events in a supported ChatGPT Work cha
 
 ## Play
 
-Mention **@Arcade** in a supported chat, or [play in your browser](https://arcade.beautifulthings.org/?game=rally). Choose **Play a Human** and connect your World ID. No separate World ID plugin needed.
+Mention **@Arcade** in a supported chat, or [play in your browser](https://arcade.beautifulthings.org/?game=rally). Select **Tap to Start** and verify with World ID when required. Practice against the bot while Arcade looks for another human. No separate World ID plugin needed.
 
 **Rally** — Classic paddle arcade.
 
