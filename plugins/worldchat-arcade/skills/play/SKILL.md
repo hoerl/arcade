@@ -18,7 +18,7 @@ An Arcade mention is a request to launch a game, not a request for a game-select
 Do not answer a play request before calling the launch tool. A plugin mention is already authorization to open its game; never ask for confirmation. In this host, `arcade.catalog` and `arcade.play` may be exposed as `mcp__worldchat__arcade_catalog` and `mcp__worldchat__arcade_play`. The registered connection may instead expose these under the Arcade MCP app namespace. Use the actual exposed names belonging to Arcadeâ€™s connected app. If necessary discover them through the host tool registry.
 
 Examples:
-- `@arcade` or `@arcade start a game`: read the catalog, choose a supported game, call the play tool.
+- `@arcade` or `@arcade start a game`: read the catalog, call the play tool with {} so the server selects a random game.
 - `@arcade rally`: read the catalog, call the play tool with `{"gameId":"rally"}`. Rally is paddle arcade, never racing.
 - `yes` after a mistaken racing description: correct it by launching the real catalog game, without another question.
 
@@ -27,8 +27,8 @@ A successful launch must come from the tool's inline UI resource. Text such as â
 ### Choose and launch
 
 1. Call `arcade.catalog` to get the currently available games. The live catalog is authoritative; do not use remembered prototypes or infer rules from a game's name.
-2. If the user names an available game, use its exact catalog ID. If no game is specified, choose Rally when present, otherwise the first listed game supported by `arcade.play`. Do not ask which game they want or whether to launch it. If a requested game is unavailable, briefly say so and choose an available catalog game instead.
-3. Call `arcade.play` with that `gameId` once to render the game inline in this conversation. For Rally, `arcade.open` is an equivalent launch if `arcade.play` is unavailable. A catalog listing or a prose reply alone does not open a game.
+2. If the user names an available game, use its exact catalog ID. If no game is specified, omit `gameId` so `arcade.play` randomly selects from the playable catalog on every launch. Do not select Rally or the first catalog entry by default. Do not ask which game they want or whether to launch it. If a requested game is unavailable, briefly say so and choose an available catalog game instead.
+3. Call `arcade.play` once with the named `gameId`, or with `{}` for a random game, to render the game inline in this conversation. `arcade.open` also chooses a random game; use it only for an unspecified game when `arcade.play` is unavailable. A catalog listing or a prose reply alone does not open a game.
 4. Let the player interact with the card. Omit accompanying prose or use one short gameplay sentence. Do not send the user to a browser, side panel, plugin picker, or another chat to start playing.
 
 Rally is **Classic paddle arcade**: two paddles and a ball. It is not a racing game. Describe any game only using its catalog entry and actual tool results.
