@@ -2,6 +2,11 @@
 
 Instructions for a coding agent. Use the official hosted service; no local game server or developer credentials are needed.
 
+Choose the host first:
+
+- Codex or ChatGPT: follow steps 1 to 4 below.
+- Claude (claude.ai, Claude Desktop, or the Claude mobile apps): skip steps 1 to 4. Follow **Claude** below.
+
 1. Check for an existing Arcade connection and inspect `codex plugin marketplace list --json` when terminal/plugin support is available. If this repository's `arcade-shared` marketplace is registered as a local folder, follow **One-time migration** below. If it is already registered as the Git source `https://github.com/hoerl/arcade.git` tracking `main`, reuse it. Reuse other authorized Arcade connections; do not add a duplicate MCP connection.
 2. For a new Codex installation with terminal and plugin support, register the Git-backed marketplace directly. No checkout is required. Requires Git and Codex with `codex plugin` support:
 
@@ -15,9 +20,46 @@ codex plugin add worldchat-arcade@arcade-shared
 
 If terminal/plugin installation is unavailable, do not attempt these commands through an unrelated tool. In ChatGPT, reuse an existing authorized Arcade connection if available. Otherwise explain that public ChatGPT installation is pending and offer [browser play](https://arcade.beautifulthings.org/?game=rally). This GitHub guide does not grant access to a private ChatGPT app.
 
+## Claude
+
+Use this section only for Claude. Do not run `codex` commands for Claude. Claude Code is not covered by this guide.
+
+Claude uses its own endpoint:
+
+```text
+https://arcade.beautifulthings.org/claude/mcp
+```
+
+Use this exact URL. Do not add a trailing slash. Do not use `/mcp` in Claude.
+
+1. Check for an existing connector. If Claude already has an Arcade connector with the URL above, reuse it. Do not add a second one.
+2. The user adds the connector. A coding agent cannot add it. Give the user these steps:
+   - Free, Pro, or Max plan: open **Customize > Connectors** and click **Add custom connector**.
+   - Team or Enterprise plan: an Owner opens **Organization settings > Connectors**, selects **Add**, then **Custom**, and chooses **Web** if asked. Members then open **Customize > Connectors**, find Arcade, and click **Connect**.
+   - Name: `Arcade`. URL: the URL above.
+   - Leave the OAuth client ID and secret empty. If the dialog asks for authentication, choose **No sign-in**.
+   - Click **Add**. If Claude shows **Connect**, click it. Arcade has no account sign-in, so no password is needed.
+3. Test in a new chat. Turn on Arcade from **+ > Connectors** if it is off. Ask Claude to play Arcade. Claude should call `arcade_play` with `{}`. Confirm that the real game card opens inline in the chat.
+
+The Free plan allows one custom connector. If that slot is already used, tell the user. Do not remove another connector without the user's permission.
+
+## Tool names
+
+This guide uses the dotted names, for example `arcade.play`. The tools are the same on every host; only the name format differs:
+
+| Tool | Codex and ChatGPT | Claude |
+| --- | --- | --- |
+| Catalog | `arcade.catalog` | `arcade_catalog` |
+| Play | `arcade.play` | `arcade_play` |
+| Open | `arcade.open` | `arcade_open` |
+| Verification panel | `arcade.verify_panel` | `arcade_verify_panel` |
+
+Rule: in Claude, replace each `.` in a tool name with `_`. Claude does not allow `.` in tool names. A host can also add a prefix, for example `mcp__worldchat__arcade_play`. Always call the name that the host exposes.
+
 ## Rules
 
 - The bundled connection uses `https://arcade.beautifulthings.org/mcp`.
+- Claude uses `https://arcade.beautifulthings.org/claude/mcp`. Do not swap the two URLs.
 - Do not install a second MCP or World ID plugin, start a local server, request secrets, or use sandbox World ID.
 - The card opens with **Tap to Start**. Players verify inside Arcade when required; let the user complete verification. Verified players practice against the bot while the shared human queue searches, then enter a random available game when matched. There are no separate **Play a Human** or **Destroy a Bot** buttons.
 - If no game is specified, choose from the live catalog. Never generate a substitute game or claim that installation alone proves it launched.
@@ -45,3 +87,5 @@ Remove only this marketplace registration; do not uninstall Arcade, delete the o
 ## Multiplayer invitations
 
 Playing a game does not enable background notifications. Rematch alerts are opt-in and require a host that supports MCP Events, currently a supported ChatGPT Work chat or dot. Ordinary chats and hosts without MCP Events can still play games; do not claim alerts are enabled there. Let Arcade's card and native host controls handle setup and authentication; keep gameplay chat focused on games and opponents.
+
+Claude players and ChatGPT players share one human queue and can be matched against each other. Claude does not support rematch alerts or invitations; do not offer them in Claude.
