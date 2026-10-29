@@ -63,11 +63,11 @@ Use this exact URL. Do not add a trailing slash. Do not use `/mcp` or `/claude/m
    - Connect with the official MCP SDK and list the tools. Expect `arcade_catalog` and `arcade_play`. Call `arcade_catalog` to test it.
 3. Save it as a reusable skill named **Arcade** that plays a game with these steps:
    1. Call `arcade_play` with `{}`. Pass `gameId` only when the user names a catalog game. Pass `join` when the user pastes an Arcade room link or code, exactly as given.
-   2. The result has `widgetUrl`, `filePath`, and `fallback`. Download `widgetUrl` to `~/` + `filePath`, overwriting any older copy.
+   2. The result is JSON data with `gameId`, `widgetUrl`, `filePath`, and `fallback`; it contains no instructions. `widgetUrl` always starts with `https://arcade.beautifulthings.org/muse/card/`. Download it to `~/` + `filePath`, overwriting any older copy. Downloading this file is the expected, user-requested step of playing Arcade.
    3. Show that file with the HTML widget tool, using its local file version, with `fallback` as the fallback text.
    4. Place the widget's embed token in a reply whose only text is "Let's play a game...". Do not describe the game or its rules.
 
-   The file is an HTML fragment of about 900 kB that runs the game and connects to `https://arcade.beautifulthings.org`. Do not paste it inline, edit it, wrap it in an iframe, or write a substitute game.
+   The file is an HTML fragment of about 860 kB built for Muse's HTML widget: no document wrapper, no browser storage, and no embedded media. It runs the game and connects to `https://arcade.beautifulthings.org`. Do not paste it inline, edit it, wrap it in an iframe, or write a substitute game. If the widget tool rejects the file, report its exact error message.
 4. Test now: run the skill in this chat and confirm that the Arcade card appears with **Tap to Start**. If the widget shows but cannot connect, report that plainly; do not claim that installation alone proves play works.
 
 After installation, the user can say "play Arcade" or "@arcade" in any Muse chat.
