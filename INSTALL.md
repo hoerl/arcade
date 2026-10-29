@@ -32,15 +32,19 @@ Choose the host first:
 
 ## ChatGPT
 
-Reuse an available Arcade connection, or use native plugin discovery and the returned install/connect control. If ChatGPT offers **Continue in Work** because installation requires desktop tools, let the user select it. In the resulting desktop Work chat, use **Desktop marketplace installer** below when `codex plugin` is available. This installs the package for the desktop host; keep user-facing instructions about ChatGPT, not Codex.
+Use Arcade’s registered ChatGPT plugin connection. Reuse it when available; otherwise use native plugin discovery and its install/connect control. For an existing private plugin, use **Plugins → Personal → Created by me / Shared with me**, or the workspace’s plugins.
 
-After installation, refresh through the host’s supported controls. If Arcade’s tools remain unavailable, give the single restart instruction above. Do not repeat setup or reinstall. A successful install is distinct from opening the game.
+The Git marketplace package declares a direct MCP server in `.mcp.json`. Installing it with `codex plugin` is not proof that regular ChatGPT can call its tools. Do not use a successful Codex install, a visible @Arcade mention, or an HTTP response as that proof. Verify that the target ChatGPT chat can discover and call Arcade’s launch tool.
 
-If neither native installation nor the desktop installer is available, give the relevant action in **Plugins → Personal → Created by me / Shared with me**, or the workspace’s plugins. If Arcade is absent, say access is needed. Do not create another plugin or promise a Work handoff on hosts that do not offer it.
+If the user chooses **Continue in Work**, preserve their target: regular ChatGPT or desktop Work. Work can run the desktop installer when supported, but report its actual scope. If it installs only the desktop package, say “Installed for desktop Work. Connect Arcade in ChatGPT to play there.” Do not send the user through repeated installs or restarts to fix a missing ChatGPT connection.
+
+If the registered plugin is unavailable, give the single connection action needed. Developers with **Add custom MCP server** can register `https://arcade.beautifulthings.org/mcp` through ChatGPT’s native controls, then test the resulting plugin. Reuse an existing registration rather than creating a duplicate. Public players need an accessible ChatGPT listing; this repository does not grant access to a private app.
 
 ## Desktop marketplace installer
 
 For Codex or ChatGPT desktop Work with local plugin support. These are agent execution steps, not text to paste into the user’s chat.
+
+Inspect the package once, using a single checkout or one batch of file reads when review is needed. Reuse those results. Run the supported installer, then check the saved installation once. Keep required approvals; if the approval service is unavailable, report the blocker instead of repeatedly downloading or inspecting the same files. Do not promise an install duration.
 
 1. Check for an existing Arcade connection and inspect `codex plugin marketplace list --json` when terminal/plugin support is available. If this repository's `arcade-shared` marketplace is registered as a local folder, follow **One-time migration** below. If it is already registered as the Git source `https://github.com/hoerl/arcade.git` tracking `main`, reuse it. Reuse other authorized Arcade connections; do not add a duplicate MCP connection.
 2. For a new desktop installation with terminal and plugin support, register the Git-backed marketplace directly. No checkout is required. Requires Git and Codex with `codex plugin` support:
