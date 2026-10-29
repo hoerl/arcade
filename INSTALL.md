@@ -1,16 +1,27 @@
 # Install Arcade
 
-Install Arcade using the current host’s supported installer. Arcade plays inline; never offer browser play.
+Keep updates to a brief status and the next action.
 
-## Status wording
+Install Arcade in the app the user is using. Reuse a working installation. Otherwise install, check the result, and open the game when its tools are available. Arcade plays inside the chat; never offer browser play.
 
-Keep user-facing text to one short status and, only when needed, one action. Perform the installation checks without narrating commands, package internals, or checklists. Preserve necessary permission and error messages. Use the host’s progress indicators rather than repeating updates.
+## User messages
 
-- Working: “Installing Arcade…”
-- Host handoff required: “Continue in Work to install Arcade.” After the user continues, carry on without another plan or recap.
-- Installed, tools not loaded: “Installed. Restart ChatGPT, then say ‘Play Arcade.’” Name the actual app; use this only when its refresh cannot load the tools.
-- Game opened: “Let’s play a game…”
-- Blocked: one short reason and the next action. Do not claim a game opened based on installation or an HTTP check alone.
+Use one short sentence per update. Send an update only when the status changes or the user needs to act. Use the host’s progress display for routine work. Do not repeat a plan after a handoff.
+
+Run the checks below, but do not include commands, versions, paths, or a checklist in the completion message unless the user asks. Report an actual error or required permission clearly. Keep required host approval prompts intact.
+
+| State | Message |
+| --- | --- |
+| Installing | Installing Arcade… |
+| ChatGPT requires Work | Continue in Work to install Arcade. |
+| Installed; ChatGPT needs a restart to load the tools | Installed. Restart ChatGPT, then say “Play Arcade.” |
+| Installed; another app needs a restart | Installed. Restart [app name], then say “Play Arcade.” |
+| Game opened | Let’s play a game… |
+| Cannot continue | [Short reason]. [Required action]. |
+
+Use only the message that matches the checked result. Installation success does not prove the game opened. When a restart is needed, state that next step once and stop.
+
+The app name comes from the user’s chat, not the command used to install. In ChatGPT Work, say **ChatGPT** even when running `codex plugin` commands.
 
 Choose the host first:
 
