@@ -2,6 +2,8 @@
 
 Install Arcade in the app where the user is chatting. Follow only that host’s section and keep the reply to the action taken or the next step needed. Use the official hosted service; no local game server or developer credentials are needed.
 
+Arcade plays inline in the current host. Never suggest browser play, including when installation or connection fails. Give only the next step for that host.
+
 Choose the host first:
 
 - ChatGPT: follow **ChatGPT** below.
@@ -13,7 +15,7 @@ Choose the host first:
 
 Reuse an available Arcade connection. Otherwise use ChatGPT’s plugin discovery to find Arcade and present its native install/connect control, using the result’s exact plugin ID. Let the user complete connection, then open Arcade with the available play tool. A GitHub guide is not an install link.
 
-If discovery is unavailable or finds no matching listing, give one next step: look for Arcade in the [plugin directory](https://chatgpt.com/plugins), or use an Arcade install link already provided by the user. Say only that installation could not be completed in this chat; availability depends on the user’s account and workspace. Do not substitute Codex commands, suggest restarting Codex, or offer browser play. Never claim installation succeeded until the connection is available.
+If discovery is unavailable or finds no matching listing, direct the user to **Plugins → Personal → Created by me / Shared with me**, or their workspace’s plugins, to install Arcade if it is available there. Use an existing Arcade install link when supplied. If Arcade is absent, explain briefly that access to the plugin is needed. Keep Codex commands in Codex. Confirm installation only after the connection is available.
 
 ## Codex
 
