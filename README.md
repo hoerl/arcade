@@ -9,7 +9,7 @@ Multiplayer games inside ChatGPT, Claude, and Muse. Connect your World ID and pl
 Paste this into your chat:
 
 ```text
-Read https://raw.githubusercontent.com/hoerl/arcade/main/INSTALL.md and install Arcade.
+Install Arcade using https://raw.githubusercontent.com/hoerl/arcade/main/INSTALL.md. Keep updates to a brief status and the next action.
 ```
 
 In Codex, the guide installs the hosted MCP plugin from a Git-backed marketplace. Codex Desktop checks for package updates at app-server startup, so users do not need to rerun install commands for each release. Existing local-checkout installs need the guide's one-time migration. In ChatGPT, the guide uses native plugin discovery and connection when Arcade is available to your account.

@@ -1,26 +1,38 @@
 # Install Arcade
 
-Install Arcade in the app where the user is chatting. Follow only that host’s section and keep the reply to the action taken or the next step needed. Use the official hosted service; no local game server or developer credentials are needed.
+Install Arcade using the current host’s supported installer. Arcade plays inline; never offer browser play.
 
-Arcade plays inline in the current host. Never suggest browser play, including when installation or connection fails. Give only the next step for that host.
+## Status wording
+
+Keep user-facing text to one short status and, only when needed, one action. Perform the installation checks without narrating commands, package internals, or checklists. Preserve necessary permission and error messages. Use the host’s progress indicators rather than repeating updates.
+
+- Working: “Installing Arcade…”
+- Host handoff required: “Continue in Work to install Arcade.” After the user continues, carry on without another plan or recap.
+- Installed, tools not loaded: “Installed. Restart ChatGPT, then say ‘Play Arcade.’” Name the actual app; use this only when its refresh cannot load the tools.
+- Game opened: “Let’s play a game…”
+- Blocked: one short reason and the next action. Do not claim a game opened based on installation or an HTTP check alone.
 
 Choose the host first:
 
 - ChatGPT: follow **ChatGPT** below.
-- Codex: follow **Codex** below.
+- Codex: follow **Desktop marketplace installer** below.
 - Claude (claude.ai, Claude Desktop, or the Claude mobile apps): follow **Claude** below.
 - Muse (Meta): follow **Muse** below.
 
 ## ChatGPT
 
-Reuse an available Arcade connection. Otherwise use ChatGPT’s plugin discovery to find Arcade and present its native install/connect control, using the result’s exact plugin ID. Let the user complete connection, then open Arcade with the available play tool. A GitHub guide is not an install link.
+Reuse an available Arcade connection, or use native plugin discovery and the returned install/connect control. If ChatGPT offers **Continue in Work** because installation requires desktop tools, let the user select it. In the resulting desktop Work chat, use **Desktop marketplace installer** below when `codex plugin` is available. This installs the package for the desktop host; keep user-facing instructions about ChatGPT, not Codex.
 
-If discovery is unavailable or finds no matching listing, direct the user to **Plugins → Personal → Created by me / Shared with me**, or their workspace’s plugins, to install Arcade if it is available there. Use an existing Arcade install link when supplied. If Arcade is absent, explain briefly that access to the plugin is needed. Keep Codex commands in Codex. Confirm installation only after the connection is available.
+After installation, refresh through the host’s supported controls. If Arcade’s tools remain unavailable, give the single restart instruction above. Do not repeat setup or reinstall. A successful install is distinct from opening the game.
 
-## Codex
+If neither native installation nor the desktop installer is available, give the relevant action in **Plugins → Personal → Created by me / Shared with me**, or the workspace’s plugins. If Arcade is absent, say access is needed. Do not create another plugin or promise a Work handoff on hosts that do not offer it.
+
+## Desktop marketplace installer
+
+For Codex or ChatGPT desktop Work with local plugin support. These are agent execution steps, not text to paste into the user’s chat.
 
 1. Check for an existing Arcade connection and inspect `codex plugin marketplace list --json` when terminal/plugin support is available. If this repository's `arcade-shared` marketplace is registered as a local folder, follow **One-time migration** below. If it is already registered as the Git source `https://github.com/hoerl/arcade.git` tracking `main`, reuse it. Reuse other authorized Arcade connections; do not add a duplicate MCP connection.
-2. For a new Codex installation with terminal and plugin support, register the Git-backed marketplace directly. No checkout is required. Requires Git and Codex with `codex plugin` support:
+2. For a new desktop installation with terminal and plugin support, register the Git-backed marketplace directly. No checkout is required. Requires Git and Codex with `codex plugin` support:
 
 ```sh
 codex plugin marketplace add https://github.com/hoerl/arcade.git --ref main
@@ -30,7 +42,7 @@ codex plugin add worldchat-arcade@arcade-shared
 3. Confirm that `arcade-shared` has `marketplaceSource.sourceType` equal to `git` and the official repository URL in `codex plugin marketplace list --json`, and that `worldchat-arcade@arcade-shared` is installed. Do not register `.` or a checkout directory as the source; local folders do not receive Git updates. Keep the source on the moving `main` branch, not a fixed commit or release tag.
 4. Reload plugins through the host's supported mechanism after installation. If the desktop host does not pick up the change, restart it. In a fresh chat, read the live catalog and call `arcade.play` with `{}` so Arcade randomly selects a game. Pass an exact catalog `gameId` only if the user names a game. Confirm the real game opens inline.
 
-If Codex plugin installation is unavailable, report that limitation briefly. Do not run these commands through another host’s tools.
+Use these commands only in a desktop environment that exposes `codex plugin`; do not install into a temporary cloud container or run them in Claude or Muse.
 
 ## Claude
 
@@ -45,7 +57,7 @@ https://arcade.beautifulthings.org/claude/mcp
 Use this exact URL. Do not add a trailing slash. Do not use `/mcp` in Claude.
 
 1. Check for an existing connector. If Claude already has an Arcade connector with the URL above, reuse it. Do not add a second one.
-2. The user adds the connector. A coding agent cannot add it. Give the user these steps:
+2. The user adds the connector. Give only the steps for their plan, compactly:
    - Free, Pro, or Max plan: open **Customize > Connectors** and click **Add custom connector**.
    - Team or Enterprise plan: an Owner opens **Organization settings > Connectors**, selects **Add**, then **Custom**, and chooses **Web** if asked. Members then open **Customize > Connectors**, find Arcade, and click **Connect**.
    - Name: `Arcade`. URL: the URL above.
