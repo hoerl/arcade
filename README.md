@@ -2,7 +2,7 @@
 
 **Play games together.**
 
-Multiplayer games inside ChatGPT and Claude. Connect your World ID and play with real people, on either app. Warm up against a bot while waiting for a human.
+Multiplayer games inside ChatGPT, Claude, and Muse. Connect your World ID and play with real people, on either app. Warm up against a bot while waiting for a human.
 
 ## Install
 
@@ -20,7 +20,13 @@ In Claude, add a custom connector with this URL (the install guide has the steps
 https://arcade.beautifulthings.org/claude/mcp
 ```
 
-Rematch alerts are opt-in and require MCP Events in a supported ChatGPT Work chat or dot; installation alone does not enable notifications. Claude has no rematch alerts.
+In Muse, paste the install prompt into a chat. Muse connects to its own endpoint and saves Arcade as a skill:
+
+```text
+https://arcade.beautifulthings.org/muse/mcp
+```
+
+Rematch alerts are opt-in and require MCP Events in a supported ChatGPT Work chat or dot; installation alone does not enable notifications. Claude and Muse have no rematch alerts.
 
 ## Play
 

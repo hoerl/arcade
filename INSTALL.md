@@ -6,6 +6,7 @@ Choose the host first:
 
 - Codex or ChatGPT: follow steps 1 to 4 below.
 - Claude (claude.ai, Claude Desktop, or the Claude mobile apps): skip steps 1 to 4. Follow **Claude** below.
+- Muse (Meta): skip steps 1 to 4. Follow **Muse** below.
 
 1. Check for an existing Arcade connection and inspect `codex plugin marketplace list --json` when terminal/plugin support is available. If this repository's `arcade-shared` marketplace is registered as a local folder, follow **One-time migration** below. If it is already registered as the Git source `https://github.com/hoerl/arcade.git` tracking `main`, reuse it. Reuse other authorized Arcade connections; do not add a duplicate MCP connection.
 2. For a new Codex installation with terminal and plugin support, register the Git-backed marketplace directly. No checkout is required. Requires Git and Codex with `codex plugin` support:
@@ -43,23 +44,51 @@ Use this exact URL. Do not add a trailing slash. Do not use `/mcp` in Claude.
 
 The Free plan allows one custom connector. If that slot is already used, tell the user. Do not remove another connector without the user's permission.
 
+## Muse
+
+Use this section only in Muse (Meta). Do not run `codex` commands in Muse. Muse does not render MCP App cards, so Arcade gives Muse the game as a ready-made HTML widget file instead.
+
+Muse uses its own endpoint:
+
+```text
+https://arcade.beautifulthings.org/muse/mcp
+```
+
+Use this exact URL. Do not add a trailing slash. Do not use `/mcp` or `/claude/mcp` in Muse.
+
+1. Check for an existing Arcade connector or skill. If one already uses the URL above, reuse it. Do not add a second one.
+2. Create a custom connector yourself; the user does not need to open settings:
+   - Name: `Arcade`. Transport: remote streamable HTTP. URL: the URL above.
+   - Auth: none. Arcade has no account sign-in, API key, or OAuth. Do not ask the user for a key.
+   - Connect with the official MCP SDK and list the tools. Expect `arcade_catalog` and `arcade_play`. Call `arcade_catalog` to test it.
+3. Save it as a reusable skill named **Arcade** that plays a game with these steps:
+   1. Call `arcade_play` with `{}`. Pass `gameId` only when the user names a catalog game. Pass `join` when the user pastes an Arcade room link or code, exactly as given.
+   2. The result has `widgetUrl`, `filePath`, and `fallback`. Download `widgetUrl` to `~/` + `filePath`, overwriting any older copy.
+   3. Show that file with the HTML widget tool, using its local file version, with `fallback` as the fallback text.
+   4. Place the widget's embed token in a reply whose only text is "Let's play a game...". Do not describe the game or its rules.
+
+   The file is an HTML fragment of about 900 kB that runs the game and connects to `https://arcade.beautifulthings.org`. Do not paste it inline, edit it, wrap it in an iframe, or write a substitute game.
+4. Test now: run the skill in this chat and confirm that the Arcade card appears with **Tap to Start**. If the widget shows but cannot connect, report that plainly; do not claim that installation alone proves play works.
+
+After installation, the user can say "play Arcade" or "@arcade" in any Muse chat.
+
 ## Tool names
 
 This guide uses the dotted names, for example `arcade.play`. The tools are the same on every host; only the name format differs:
 
-| Tool | Codex and ChatGPT | Claude |
-| --- | --- | --- |
-| Catalog | `arcade.catalog` | `arcade_catalog` |
-| Play | `arcade.play` | `arcade_play` |
-| Open | `arcade.open` | `arcade_open` |
-| Verification panel | `arcade.verify_panel` | `arcade_verify_panel` |
+| Tool | Codex and ChatGPT | Claude | Muse |
+| --- | --- | --- | --- |
+| Catalog | `arcade.catalog` | `arcade_catalog` | `arcade_catalog` |
+| Play | `arcade.play` | `arcade_play` | `arcade_play` |
+| Open | `arcade.open` | `arcade_open` | — |
+| Verification panel | `arcade.verify_panel` | `arcade_verify_panel` | — |
 
 Rule: in Claude, replace each `.` in a tool name with `_`. Claude does not allow `.` in tool names. A host can also add a prefix, for example `mcp__worldchat__arcade_play`. Always call the name that the host exposes.
 
 ## Rules
 
 - The bundled connection uses `https://arcade.beautifulthings.org/mcp`.
-- Claude uses `https://arcade.beautifulthings.org/claude/mcp`. Do not swap the two URLs.
+- Claude uses `https://arcade.beautifulthings.org/claude/mcp`. Muse uses `https://arcade.beautifulthings.org/muse/mcp`. Do not swap the URLs.
 - Do not install a second MCP or World ID plugin, start a local server, request secrets, or use sandbox World ID.
 - The card opens with **Tap to Start**. Players verify inside Arcade when required; let the user complete verification. Verified players practice against the bot while the shared human queue searches, then enter a random available game when matched. There are no separate **Play a Human** or **Destroy a Bot** buttons.
 - If no game is specified, choose from the live catalog. Never generate a substitute game or claim that installation alone proves it launched.
@@ -88,4 +117,4 @@ Remove only this marketplace registration; do not uninstall Arcade, delete the o
 
 Playing a game does not enable background notifications. Rematch alerts are opt-in and require a host that supports MCP Events, currently a supported ChatGPT Work chat or dot. Ordinary chats and hosts without MCP Events can still play games; do not claim alerts are enabled there. Let Arcade's card and native host controls handle setup and authentication; keep gameplay chat focused on games and opponents.
 
-Claude players and ChatGPT players share one human queue and can be matched against each other. Claude does not support rematch alerts or invitations; do not offer them in Claude.
+Claude, Muse, and ChatGPT players share one human queue and can be matched against each other. Claude and Muse do not support rematch alerts or invitations; do not offer them there.
