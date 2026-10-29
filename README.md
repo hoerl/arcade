@@ -6,13 +6,13 @@ Multiplayer games inside ChatGPT, Claude, and Muse. Connect your World ID and pl
 
 ## Install
 
-Paste this into your coding agent:
+Paste this into your chat:
 
 ```text
 Read https://raw.githubusercontent.com/hoerl/arcade/main/INSTALL.md and install Arcade.
 ```
 
-The guide installs the hosted MCP plugin from a Git-backed marketplace. Codex Desktop checks for package updates at app-server startup, so users do not need to rerun install commands for each release. Existing local-checkout installs need the guide's one-time migration. Public ChatGPT installation is coming soon.
+In Codex, the guide installs the hosted MCP plugin from a Git-backed marketplace. Codex Desktop checks for package updates at app-server startup, so users do not need to rerun install commands for each release. Existing local-checkout installs need the guide's one-time migration. In ChatGPT, the guide uses native plugin discovery and connection when Arcade is available to your account.
 
 In Claude, add a custom connector with this URL (the install guide has the steps):
 
@@ -30,7 +30,7 @@ Rematch alerts are opt-in and require MCP Events in a supported ChatGPT Work cha
 
 ## Play
 
-Mention **@Arcade** in a supported chat, ask Claude to play Arcade, or [play in your browser](https://arcade.beautifulthings.org/?game=rally). Select **Tap to Start** and verify with World ID when required. Practice against the bot while Arcade looks for another human. No separate World ID plugin needed.
+Mention **@Arcade** in a supported chat or ask Claude to play Arcade. Select **Tap to Start** and verify with World ID when required. Practice against the bot while Arcade looks for another human. No separate World ID plugin needed.
 
 **Rally** — Classic paddle arcade.
 

@@ -1,12 +1,21 @@
 # Install Arcade
 
-Instructions for a coding agent. Use the official hosted service; no local game server or developer credentials are needed.
+Install Arcade in the app where the user is chatting. Follow only that host’s section and keep the reply to the action taken or the next step needed. Use the official hosted service; no local game server or developer credentials are needed.
 
 Choose the host first:
 
-- Codex or ChatGPT: follow steps 1 to 4 below.
-- Claude (claude.ai, Claude Desktop, or the Claude mobile apps): skip steps 1 to 4. Follow **Claude** below.
-- Muse (Meta): skip steps 1 to 4. Follow **Muse** below.
+- ChatGPT: follow **ChatGPT** below.
+- Codex: follow **Codex** below.
+- Claude (claude.ai, Claude Desktop, or the Claude mobile apps): follow **Claude** below.
+- Muse (Meta): follow **Muse** below.
+
+## ChatGPT
+
+Reuse an available Arcade connection. Otherwise use ChatGPT’s plugin discovery to find Arcade and present its native install/connect control, using the result’s exact plugin ID. Let the user complete connection, then open Arcade with the available play tool. A GitHub guide is not an install link.
+
+If discovery is unavailable or finds no matching listing, give one next step: look for Arcade in the [plugin directory](https://chatgpt.com/plugins), or use an Arcade install link already provided by the user. Say only that installation could not be completed in this chat; availability depends on the user’s account and workspace. Do not substitute Codex commands, suggest restarting Codex, or offer browser play. Never claim installation succeeded until the connection is available.
+
+## Codex
 
 1. Check for an existing Arcade connection and inspect `codex plugin marketplace list --json` when terminal/plugin support is available. If this repository's `arcade-shared` marketplace is registered as a local folder, follow **One-time migration** below. If it is already registered as the Git source `https://github.com/hoerl/arcade.git` tracking `main`, reuse it. Reuse other authorized Arcade connections; do not add a duplicate MCP connection.
 2. For a new Codex installation with terminal and plugin support, register the Git-backed marketplace directly. No checkout is required. Requires Git and Codex with `codex plugin` support:
@@ -19,7 +28,7 @@ codex plugin add worldchat-arcade@arcade-shared
 3. Confirm that `arcade-shared` has `marketplaceSource.sourceType` equal to `git` and the official repository URL in `codex plugin marketplace list --json`, and that `worldchat-arcade@arcade-shared` is installed. Do not register `.` or a checkout directory as the source; local folders do not receive Git updates. Keep the source on the moving `main` branch, not a fixed commit or release tag.
 4. Reload plugins through the host's supported mechanism after installation. If the desktop host does not pick up the change, restart it. In a fresh chat, read the live catalog and call `arcade.play` with `{}` so Arcade randomly selects a game. Pass an exact catalog `gameId` only if the user names a game. Confirm the real game opens inline.
 
-If terminal/plugin installation is unavailable, do not attempt these commands through an unrelated tool. In ChatGPT, reuse an existing authorized Arcade connection if available. Otherwise explain that public ChatGPT installation is pending and offer [browser play](https://arcade.beautifulthings.org/?game=rally). This GitHub guide does not grant access to a private ChatGPT app.
+If Codex plugin installation is unavailable, report that limitation briefly. Do not run these commands through another host’s tools.
 
 ## Claude
 
